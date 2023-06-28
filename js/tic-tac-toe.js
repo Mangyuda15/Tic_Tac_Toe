@@ -9,8 +9,6 @@ class TicTacToe {
 
     //Init
     this.init();
-
-    // console.log(selector, this.parentElement);
   }
 
   init() {
@@ -71,7 +69,6 @@ class TicTacToe {
 
   // Memanggil Class
   onCellClick(event, index) {
-    // console.log("on btn cell click");
     const btn = event.target;
     btn.innerText = this.getPlayerLabel();
     btn.classList.add(btn.innerText);
@@ -79,7 +76,6 @@ class TicTacToe {
     this.GameBoard[index] = btn.innerText;
     this.checkWinner();
     this.switchPlayer();
-    // console.log(this.GameBoard);
   }
 
   // Player Swith
@@ -103,14 +99,10 @@ class TicTacToe {
 
   // Tombol Reset
   gameReset() {
-    //Masih Error Tombol Reset Belum Berfungsi Dengan Baik
-    // console.log("Games Reset");
     this.GameBoard = Array(9).fill("");
-    this.switchPlayer = 0;
+    this.switchPlayer(0);
 
-    //DISINI NYA DIA ERROR BELUM KETEMU SOLSINYA
     for (const btn of document.querySelector(".play-game").children) {
-      console.log(btn);
       btn.innerHTML = "";
       btn.classList.remove("X", "O");
       btn.disabled = false;
@@ -134,10 +126,7 @@ class TicTacToe {
     for (let i = 0; i < winnerConditions.length; i++) {
       const [a, b, c] = winnerConditions[i];
 
-      if (this.getPlayerLabel() == this.GameBoard[a] && 
-      this.getPlayerLabel() == this.GameBoard[b] && 
-      this.getPlayerLabel() == this.GameBoard[c]
-      ) { 
+      if (this.getPlayerLabel() == this.GameBoard[a] && this.getPlayerLabel() == this.GameBoard[b] && this.getPlayerLabel() == this.GameBoard[c]) {
         // Animasi Swith Alert
         Swal.fire({
           title: "Berhasil",
@@ -147,11 +136,7 @@ class TicTacToe {
           denyButtonText: `Ulangi Permainan`,
           icon: "Sukses",
         }).then((result) => {
-          /*Disabled Other Button Seharusnya Ketika Sudah Ada Yang Menang Itu Tidak Bisa Dimainkan Lagi Harus Klik Tombol
-           Restartnya Baru Bisa Tapi Ini Masih Error dia Dan Tombolnya Belum berfungsi dengan baik*/
           for (const btn of document.querySelector(".play-game").children) {
-            console.log(btn);
-            btn.innerHTML = "";
             btn.classList.remove("X", "O");
             btn.disabled = true;
           }
